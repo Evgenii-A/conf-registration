@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Conf registration</title>
+</head>
+<body>
+<p><h1>FILL IN THIS FORM</h1></p>
+<form id = "lecturer"  action="/registration/addLecturer" method="POST">
+    <p>
+        <label for="firstName">first name</label>
+        <input name="firstName" id="firstName">
+    </p>
+    <p>
+        <label for="lastName">last</label>
+        <input name="lastName" id="lastName">
+    </p><p>
+    <label for="middleName">middle</label>
+    <input name="middleName" id="middleName">
+</p><p>
+    <label for="password">password</label>
+    <input name="password" id="password">
+</p><p>
+    <label for="login">login</label>
+    <input name="login" id="login">
+</p><p>
+    <label for="birthDate">birthDate</label>
+    <input name="birthDate" id="birthDate">
+</p><p>
+    <label for="sectionId">sectionId</label>
+    <input name="sectionId" id="sectionId">
+</p><p>
+    <label for="performanceTime">performanceTime</label>
+    <input name="performanceTime" id="performanceTime">
+</p><p>
+    <label for="email">email</label>
+    <input name="email" id="email">
+</p><p>
+    <label for="topic">topic</label>
+    <input name="topic" id="topic">
+</p><p>
+    <input type="submit">
+</p>
+
+    <script>
+        document.getElementById('lecturer').addEventListener('submit', submitForm);
+        function submitForm(event) {
+            // Отменяем стандартное поведение браузера с отправкой формы
+            event.preventDefault();
+
+            // event.target — это HTML-элемент form
+            let formData = new FormData(event.target);
+
+            // Собираем данные формы в объект
+            let obj = {};
+            formData.forEach((value, key) => obj[key] = value);
+            // Собираем запрос к серверу
+            let request = new Request(event.target.action, {
+                method: 'POST',
+                body: JSON.stringify(obj),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            console.log( JSON.stringify(obj));
+            alert(JSON.stringify(obj));
+            // Отправляем (асинхронно!)
+            fetch(request).then(
+                function(response) {
+                    // Запрос успешно выполнен
+                    console.log(response);
+                    alert("статус выполнения запроса: "+ response.status + ", " + response.ok);
+                    // return response.json() и так далее см. документацию
+                    location.reload(true); /*true - загрузка с сервера , false - с кеша*/
+                },
+                function(error) {
+                    // Запрос не получилось отправить
+                    console.error(error);
+                }
+            );
+
+            // Код после fetch выполнится ПЕРЕД получением ответа
+            // на запрос, потому что запрос выполняется асинхронно,
+            // отдельно от основного кода
+            console.log('Запрос отправляется');
+        }
+    </script>
+
+</form>
+
+</body>
+</html>

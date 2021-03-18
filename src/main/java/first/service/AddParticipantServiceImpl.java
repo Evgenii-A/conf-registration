@@ -18,7 +18,6 @@ public class AddParticipantServiceImpl implements AddParticipantService {
     @Override
     @Transactional
     public void addParticipant(ParticipantEntity participant) {
-        System.out.println("addParticipant invoked");
         participantRepo.save(participant);
     }
 }

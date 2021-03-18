@@ -8,7 +8,5 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ConfRegApp {
     public static void main(String[] args) {
         SpringApplication.run(ConfRegApp.class, args);
-
-
     }
 }
