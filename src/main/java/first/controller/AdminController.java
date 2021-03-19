@@ -1,13 +1,12 @@
 package first.controller;
 
-import first.entity.ParticipantEntity;
+import first.dto.SectionDTO;
+import first.entity.LecturerEntity;
+import first.entity.SectionEntity;
 import first.service.AdminService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
@@ -22,11 +21,28 @@ public class AdminController {
     @GetMapping("/getAllParticipants")
     public String getAllParticipants() {
 
-        Iterable<ParticipantEntity> list = adminService.getAllParticipants();
-        ArrayList<ParticipantEntity> participantEntities = new ArrayList<>();
-        for (ParticipantEntity participantEntity : list) {
-            participantEntities.add(participantEntity);
+     return adminService.getAllParticipants().toString();
+    }
+
+    @GetMapping("/getAllParticipantsBySection")
+    public String getParticipantsBySection(@RequestBody Long id) {
+        return  adminService.getParticipantsBySection(id).toString();
+    }
+
+    @GetMapping("/getAllLecturers")
+    public String getAllLecturers() {
+
+        Iterable<LecturerEntity> list = adminService.getAllLecturers();
+        ArrayList<LecturerEntity> lecturerEntities = new ArrayList<>();
+        for (LecturerEntity lecturerEntity1: list) {
+            lecturerEntities.add(lecturerEntity1);
         }
-        return  participantEntities.toString();
+        return lecturerEntities.toString();
+    }
+
+    @PostMapping("/createSection1")
+    public void createSection(@RequestBody SectionDTO dto){
+
+        adminService.createSection(dto);
     }
 }

@@ -17,14 +17,13 @@ import java.time.LocalDateTime;
 @Table(schema = "public", name = "lecturer_entity")
 public class LecturerEntity {
     @Id
-    @GeneratedValue
-    private Long Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String firstName;
     private String lastName;
     private String middleName;
     private LocalDate birthDate;
     private String topic;
-    private Long sectionID;
     private LocalDateTime performanceTime;
     private String email;
     private String password;
