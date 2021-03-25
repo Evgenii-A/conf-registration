@@ -71,7 +71,9 @@
                     console.log(response);
                     alert("статус выполнения запроса: "+ response.status + ", " + response.ok);
                     // return response.json() и так далее см. документацию
-                    location.reload(true); /*true - загрузка с сервера , false - с кеша*/
+                    if (response.status === 201 || response.status === 200) {
+                        location.replace('/success'); /*true - загрузка с сервера , false - с кеша*/
+                    }
                 },
                 function(error) {
                     // Запрос не получилось отправить

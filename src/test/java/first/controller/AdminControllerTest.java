@@ -93,7 +93,7 @@ public class AdminControllerTest {
 
     @Test
     public void deleteSection() throws Exception {
-        String uri = "/admin/deleteSection/3";
+        String uri = "/admin/deleteSection/2";
         mockMvc.perform(delete(uri))
                 .andExpect(status().isOk())
                 .andDo(document(uri.replace("/", "\\")));

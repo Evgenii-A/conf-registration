@@ -22,7 +22,8 @@ public class RegistrationController {
     private final AddLecturerService lecturerService;
 
     public RegistrationController(Converter<ParticipantDTO, ParticipantEntity> participantConverter,
-                                  Converter<LecturerDTO, LecturerEntity> lecturerConverter, AddParticipantService participantService, AddLecturerService lecturerService) {
+                                  Converter<LecturerDTO, LecturerEntity> lecturerConverter,
+                                  AddParticipantService participantService, AddLecturerService lecturerService) {
         this.participantConverter = participantConverter;
         this.lecturerConverter = lecturerConverter;
         this.participantService = participantService;

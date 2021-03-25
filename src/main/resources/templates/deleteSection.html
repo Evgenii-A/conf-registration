@@ -6,12 +6,12 @@
     <title>Create section</title>
 </head>
 <body>
-<form id = "section" action="/admin/deleteSection" method="DELETE">
+<form id = "section" action="/admin/deleteSection/{id}">
     <p>
         <label for="id">section id</label>
         <input id ="id" name="id" >
     </p>
-    <p><input type="submit"></p>
+    <p><input type="button" onclick="deleteGoal()" ></p>
     <script>
         document.getElementById('section').addEventListener('submit', submitForm);
         function submitForm(event) {
@@ -53,6 +53,33 @@
             // на запрос, потому что запрос выполняется асинхронно,
             // отдельно от основного кода
             console.log('Запрос отправляется');
+        }
+
+        function deleteGoal() {
+            goalId = document.getElementById(id).innerText;
+
+            result = confirm("Удалить цель с id: " + goalId);
+            if (result) {
+                console.log(goalId);
+                var xhr = new XMLHttpRequest();
+                xhr.open('DELETE', '/admin/deleteSection/' + goalId, true);
+                xhr.send();
+                xhr.onreadystatechange = function () {
+                    if (this.readyState != 4) {
+                        location.reload(true);;
+                        return;
+                    }
+                    // по окончании запроса доступны:
+                    // status, statusText
+                    // responseText, responseXML (при content-type: text/xml)
+                    if (this.status != 200) {
+                        // обработать ошибку
+                        alert('ошибка: ' + (this.status ? this.statusText : 'запрос не удался'));
+                        return;
+                    }
+                    // получить результат из this.responseText или this.responseXML
+                }
+            }
         }
     </script>
 </form>

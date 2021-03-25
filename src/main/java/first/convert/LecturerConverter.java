@@ -9,7 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class LecturerConverter implements Converter<LecturerDTO, LecturerEntity> {
 
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
+
+    public LecturerConverter(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
 
     @Override
     public LecturerEntity convert(LecturerDTO lecturerDTO) {

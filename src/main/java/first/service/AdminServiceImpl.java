@@ -37,11 +37,9 @@ public class AdminServiceImpl implements AdminService{
 
     @Override
     public List<ParticipantEntity> getParticipantsBySection(Long id) {
-        if (sectionRepo.existsById(id)) {
-            SectionEntity sectionEntity = sectionRepo.findById(id).get();
-            return sectionEntity.getParticipantEntities();
-        }
-        throw new RuntimeException();
+        Optional<SectionEntity> entityOptional = sectionRepo.findById(id);
+        SectionEntity section = entityOptional.orElseThrow(() -> new RuntimeException("section not found"));
+        return section.getParticipantEntities();
     }
 
     @Override
@@ -52,11 +50,9 @@ public class AdminServiceImpl implements AdminService{
 
     @Override
     public List<LecturerEntity> getLecturersBySection(Long id) {
-        if (sectionRepo.existsById(id)) {
-            SectionEntity sectionEntity = sectionRepo.findById(id).get();
-           return sectionEntity.getLecturerEntities();
-        }
-        throw new RuntimeException();
+        Optional<SectionEntity> entityOptional = sectionRepo.findById(id);
+        SectionEntity section = entityOptional.orElseThrow(() -> new RuntimeException("section not found"));
+        return section.getLecturerEntities();
     }
 
     @Override
