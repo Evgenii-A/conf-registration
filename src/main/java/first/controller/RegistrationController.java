@@ -40,12 +40,13 @@ public class RegistrationController {
     }
 
     @PostMapping("/addLecturer")
-    public String addParticipant(@RequestBody LecturerDTO lecturerDTO) {
+    public ResponseEntity<Void> addParticipant(@RequestBody LecturerDTO lecturerDTO) {
 
         LecturerEntity lecturer = lecturerConverter.convert(lecturerDTO);
 
         lecturerService.addLecturer(lecturer);
-        return "Спасиибо за регистрацию!";
+
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
     // Exeption Handler

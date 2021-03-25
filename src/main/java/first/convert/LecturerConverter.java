@@ -15,7 +15,6 @@ public class LecturerConverter implements Converter<LecturerDTO, LecturerEntity>
     public LecturerEntity convert(LecturerDTO lecturerDTO) {
 
         return objectMapper.convertValue(lecturerDTO, LecturerEntity.class);
-
     }
 }
 

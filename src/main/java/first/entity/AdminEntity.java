@@ -1,10 +1,14 @@
 package first.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
+
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -13,6 +17,7 @@ public class AdminEntity {
     private String login;
     private String password;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id = 1L;
+//    @OneToMany(fetch = FetchType.LAZY)
+//    private List<SectionEntity> sectionEntities;
 }

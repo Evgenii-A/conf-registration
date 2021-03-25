@@ -1,16 +1,12 @@
 package first.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.stereotype.Component;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
-@Component
-@Setter
 @Entity
+@Data
+@AllArgsConstructor
 @NoArgsConstructor
 @Table(schema = "public", name = "section_entity")
 public class SectionEntity {
@@ -18,6 +14,7 @@ public class SectionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private Long capacity;
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "section_id")
     private List<ParticipantEntity> participantEntities;
@@ -25,7 +22,4 @@ public class SectionEntity {
     @JoinColumn(name = "section_id")
     private List<LecturerEntity> lecturerEntities;
 
-    public SectionEntity(String name) {
-        this.name = name;
-    }
 }

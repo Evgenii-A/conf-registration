@@ -9,7 +9,9 @@ import first.repo.LecturerRepo;
 import first.repo.ParticipantRepo;
 import first.repo.SectionRepo;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.standard.processor.StandardHrefTagProcessor;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -30,13 +32,16 @@ public class AdminServiceImpl implements AdminService{
 
     @Override
     public Iterable<ParticipantEntity> getAllParticipants() {
-
         return participantRepo.findAll();
     }
 
     @Override
-    public Optional<ParticipantEntity> getParticipantsBySection(Long id) {
-        return participantRepo.findById(id);
+    public List<ParticipantEntity> getParticipantsBySection(Long id) {
+        if (sectionRepo.existsById(id)) {
+            SectionEntity sectionEntity = sectionRepo.findById(id).get();
+            return sectionEntity.getParticipantEntities();
+        }
+        throw new RuntimeException();
     }
 
     @Override
@@ -46,12 +51,22 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public Optional<LecturerEntity> getLecturersBySection(Long id) {
-       return lecturerRepo.findById(id);
+    public List<LecturerEntity> getLecturersBySection(Long id) {
+        if (sectionRepo.existsById(id)) {
+            SectionEntity sectionEntity = sectionRepo.findById(id).get();
+           return sectionEntity.getLecturerEntities();
+        }
+        throw new RuntimeException();
     }
 
     @Override
     public void createSection(SectionDTO dto) {
-        sectionRepo.save(sectionConverter.convert(dto));
+        SectionEntity sectionEntity = sectionConverter.convert(dto);
+        sectionRepo.save(sectionEntity);
+    }
+
+    @Override
+    public void deleteSection(Long id) {
+        sectionRepo.deleteById(id);
     }
 }

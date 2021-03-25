@@ -7,6 +7,7 @@ import first.service.AdminService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
@@ -24,25 +25,30 @@ public class AdminController {
      return adminService.getAllParticipants().toString();
     }
 
-    @GetMapping("/getAllParticipantsBySection")
-    public String getParticipantsBySection(@RequestBody Long id) {
+    @GetMapping("/getAllParticipantsBySection/{id}")
+    public String getParticipantsBySection(@PathVariable Long id) {
         return  adminService.getParticipantsBySection(id).toString();
     }
 
     @GetMapping("/getAllLecturers")
     public String getAllLecturers() {
 
-        Iterable<LecturerEntity> list = adminService.getAllLecturers();
-        ArrayList<LecturerEntity> lecturerEntities = new ArrayList<>();
-        for (LecturerEntity lecturerEntity1: list) {
-            lecturerEntities.add(lecturerEntity1);
-        }
-        return lecturerEntities.toString();
+        return adminService.getAllLecturers().toString();
     }
 
-    @PostMapping("/createSection1")
+    @GetMapping("/getAllLecturersBySection/{id}")
+    public List<LecturerEntity> getLecturersBySection(@PathVariable Long id) {
+        return  adminService.getLecturersBySection(id);
+    }
+
+    @PostMapping("/createSection")
     public void createSection(@RequestBody SectionDTO dto){
 
         adminService.createSection(dto);
+    }
+
+    @DeleteMapping("/deleteSection/{id}")
+    public void deleteSection(@PathVariable Long id){
+        adminService.deleteSection(id);
     }
 }
