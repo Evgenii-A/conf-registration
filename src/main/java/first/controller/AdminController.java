@@ -6,8 +6,10 @@ import first.entity.SectionEntity;
 import first.service.AdminService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/admin")

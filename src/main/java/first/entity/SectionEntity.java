@@ -15,11 +15,10 @@ public class SectionEntity {
     private Long id;
     private String name;
     private Long capacity;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "section_id")
     private List<ParticipantEntity> participantEntities;
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "section_id")
     private List<LecturerEntity> lecturerEntities;
-
 }

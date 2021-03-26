@@ -9,7 +9,6 @@ import first.repo.LecturerRepo;
 import first.repo.ParticipantRepo;
 import first.repo.SectionRepo;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.standard.processor.StandardHrefTagProcessor;
 
 import java.util.List;
 import java.util.Optional;
